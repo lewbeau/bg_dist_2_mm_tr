@@ -13,7 +13,7 @@ str(df) #get to know the data
 paste(colnames(df), collapse = ", ") #list of the variables
 
 df <- df %>% select(marryTR, Oblast, age, kidsYoN, gender, 
-                    familyStatus, education, edu, edu2, ethnicity, еmplStatus, 
+                    familyStatus, education, edu, edu2, ethnicity, emplStatus, 
                     industry, jobClass, hshldMembers, hshldU18, 
                     netHshldIncome, placeType, yearBirth) #overwrite the df object filtering out non-determinants 
 
@@ -38,9 +38,9 @@ df <- df %>% mutate_if(is.character, factor) #convert all strings/character vect
 df %>% summary()
 
 
-#need to rename *еmplStatus* var, first is Cyrillic + other changes of var names for convenience
+#need to rename *emplStatus* var, first is Cyrillic + other changes of var names for convenience
 df <- df %>% 
-  rename(empl_status = еmplStatus) %>% 
+  rename(empl_status = emplStatus) %>% 
   rename(province = Oblast) %>% 
   rename(educ = edu2) %>% 
   rename(place_type = placeType) %>% 
@@ -106,6 +106,6 @@ levels(df$industry)
 
 # keep province var for now as will help rfImpute
 # non-bulgarians should be filtered out after the imputation; the determinants towards Turks are studied
-df %>% filter(ethnicity == "Българска") %>% count() # the sample before split will be 1287
+print(df %>% filter(ethnicity == "Българска") %>% count()) # the sample before split will be 1287
 
 
