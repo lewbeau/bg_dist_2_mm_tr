@@ -3,7 +3,7 @@
 #set working directory and paste the data files in it
 rm(list=ls()) #cleaning up the environment
 Sys.setlocale("LC_CTYPE", "bulgarian")
-options(locale = locale(encoding = "windows-1251"))
+#options(encoding = "windows-1251")
 
 
 #Data ----
@@ -106,6 +106,6 @@ levels(df$industry)
 
 # keep province var for now as will help rfImpute
 # non-bulgarians should be filtered out after the imputation; the determinants towards Turks are studied
-print(df %>% filter(ethnicity == "Българска") %>% count()) # the sample before split will be 1287
+df %>% filter(ethnicity == "Българска") %>% count() # the sample before split will be 1287
 
 
