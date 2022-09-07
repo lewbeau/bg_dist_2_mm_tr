@@ -34,9 +34,9 @@ summary(df_imp$marriage_tr)
 class(df_imp$marriage_tr)
 #we're looking for the determinants of those who reject mixed marriages b/n BGs and TRs
 df_imp <- df_imp %>% mutate(marriage_tr = recode(marriage_tr,
-                                                         "Не" = "disagree",
-                                                         "Да" = "agree_dk",
-                                                         "НП" = "agree_dk"))
+                                                 "Не" = "disagree",
+                                                 "Да" = "agree_dk",
+                                                 "НП" = "agree_dk"))
 class(df_imp$marriage_tr)
 levels(df_imp$marriage_tr)
 #we are interested in disagree (negative), so this auto factor levels are fine
@@ -45,15 +45,18 @@ levels(df_imp$marriage_tr)
 df_imp <- df_imp %>% filter(ethnicity == "Българска") %>% 
   mutate(ethnicity=NULL) %>%  
   mutate(income=NULL) #Remove the already unnecessary ethnicity var + the rather imputed income
+#alternative options is only Turks to be filtered out  - more obs, option for ethnicity as a factor
+#df_imp <- df_imp %>% filter(ethnicity != "Турска")
+
 summary(df_imp)
 levels(df_imp$marriage_tr)
 df_imp <- df_imp %>% mutate(marriage_tr = if_else(marriage_tr == "agree_dk", 1, 0))
 table(df_imp$marriage_tr)
+class(df_imp$marriage_tr)
 df_imp$marriage_tr <- as.factor(df_imp$marriage_tr)
 summary(df_imp$marriage_tr)
 775/(775+512) #BASELINE RATE, i.e. the model shoud perform better than 60.2%
-#alternative options is to only turks to be filtered out  - more obs, option for ethnicity as a factor
-#df_imp <- df_imp %>% filter(ethnicity != "Турска")
+
 
 #Data partition, i.e. split the data into train and test datasets ----
 set.seed(1113)
