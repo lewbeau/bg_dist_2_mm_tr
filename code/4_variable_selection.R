@@ -103,9 +103,9 @@
 
 #Variable/feature selection ----
 library(Boruta) #you should have the package installed
-library(mlbench) #you should have the package installed
-library(caret) #you should have the package installed
-library(randomForest) #you should have the package installed
+# library(mlbench) #you should have the package installed
+# library(caret) #you should have the package installed
+# library(randomForest) #you should have the package installed
 
 set.seed(1113)
 boruta <- Boruta(marriage_tr ~ ., 
@@ -123,7 +123,24 @@ print(bor)
 attStats(bor)
 plot(bor, las=2, cex.axis=0.7)
 
-#Alternate approach
+#option train dataset----
+set.seed(1113)
+boruta2 <- Boruta(marriage_tr ~ ., 
+                 data =train, 
+                 doTrace=2,
+                 maxRuns=500)
+print(boruta2)
+attStats(boruta2) #
+plot(boruta2, las=2, cex.axis=0.7)
+plotImpHistory(boruta2)
+
+#Tentative Fix
+bor2 <- TentativeRoughFix(boruta2)
+print(bor2)
+attStats(bor2)
+plot(bor2, las=2, cex.axis=0.7, pch = 5)
+
+#Alternate approach ----
 library(rFerns) #you should have the package installed
 Boruta(marriage_tr ~ ., 
        data=df_imp,
