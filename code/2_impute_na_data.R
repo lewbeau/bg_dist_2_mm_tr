@@ -1,4 +1,4 @@
-source("code/1_source_env_data.R")
+#source("code/1_source_env_data.R")
 
 #Dealing with missing data - imputations ----
 summary(df)
@@ -55,7 +55,7 @@ table(df_imp$marriage_tr)
 class(df_imp$marriage_tr)
 df_imp$marriage_tr <- as.factor(df_imp$marriage_tr)
 summary(df_imp$marriage_tr)
-775/(775+512) #BASELINE RATE, i.e. the model shoud perform better than 60.2%
+775/(775+512) #BASELINE RATE, i.e. the model should perform better than 60.2%
 
 
 #Data partition, i.e. split the data into train and test datasets ----
